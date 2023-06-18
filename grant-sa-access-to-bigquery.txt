@@ -1,3 +1,7 @@
+## iam roles https://cloud.google.com/iam/docs/understanding-roles#bigquery-roles
+## cli reference https://cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding
+## roles overall https://cloud.google.com/iam/docs/roles-overview
+
 # set the correct project
 gcloud config set project PROJECT_ID
 
