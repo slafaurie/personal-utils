@@ -5,6 +5,9 @@
 # set the correct project
 gcloud config set project PROJECT_ID
 
+# set the project run location
+gcloud config set run/region REGION
+
 # create service account 
 gcloud iam service-accounts create USER_ID --description "service account to use for dbt workflows"
 
