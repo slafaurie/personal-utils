@@ -1,0 +1,11 @@
+# set the correct project
+gcloud config set project PROJECT_ID
+
+# create service account 
+gcloud iam service-accounts create USER_ID --description "service account to use for dbt workflows"
+
+# create service account's keys
+gcloud iam service-accounts keys create NAME.json --iam-account USER_ID@PROJECT_ID.iam.gserviceaccount.com
+
+# attach BigQuery roles
+gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:USER_ID@PROJECT_ID.iam.gserviceaccount.com --role=roles/bigquery.admin
