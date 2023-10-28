@@ -55,3 +55,28 @@ def plot_relation_between_target_and_covariates(
         axs[i].set_title(f'{target} vs {covariate}')
     plt.tight_layout()
     plt.show()
+
+def plot_categories(df:pd.DataFrame, plot_func: callable, x:str, y:str, hue:str, color:str = "grey") -> None:
+    """Create a plot for each category in hue. The value of this function
+    is that the color is the same for each category. This is meant to be
+    used as a background plot for a plot that will be plotted on top of it.
+
+    Args:
+        df (pd.DataFrame): _description_
+        plot_func (callable): _description_
+        x (str): _description_
+        y (str): _description_
+        hue (str): _description_
+        color (str, optional): _description_. Defaults to "grey".
+    """
+    unique_values = df[hue].unique()
+    palette_dict = {value: color for value in unique_values}
+    plot_func(
+        x=x,
+        y=y,
+        hue=hue,
+        data=df,
+        palette=palette_dict,
+        legend=False
+    )
+    plt.show()
