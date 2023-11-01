@@ -8,23 +8,8 @@ class Chart:
     callabe: plt.Axes
     args: dict[str, any]
 
-def get_n_rows(n_columns:int, total_items:int):
-    """Generates the number of rows for a given number of columns and total items.
-    For example, if you have 10 items and want to display them in 3 columns, you will need 4 rows.
-    Args:
-        n_columns (int): _description_
-        total_items (int): _description_
 
-    Returns:
-        _type_: _description_
-    """
-    n_rows = int(total_items / n_columns)
-    if total_items % n_columns != 0:
-        n_rows += 1
-    return n_rows
-
-
-def make_subplots(charts: list[Chart], data: pd.DataFrame, columns: list[str], n_columns:int=2, **kwargs):
+def make_subplots(charts: list[Chart], data: pd.DataFrame, columns: list[str], n_columns:int=2, row_height:int=5, width:int=15):
     """Generates small multiples for a given list of charts and columns.
     Args:
         charts (list[Chart]): A chart is a dataclass with a callable and a dict of args. The callable is a
@@ -35,8 +20,8 @@ def make_subplots(charts: list[Chart], data: pd.DataFrame, columns: list[str], n
         columns (list[str]): _description_
         n_columns (int, optional): _description_. Defaults to 2.
     """
-    n_rows = get_n_rows(n_columns, len(columns))
-    f, axs = plt.subplots(n_rows, n_columns, **kwargs)
+    n_rows = int(np.ceil(len(columns) / n_columns))
+    f, axs = plt.subplots(n_rows, n_columns, figsize=(width, row_height*n_rows))
     axs = axs.flatten()
     for i, kpi in enumerate(columns):
         for chart in charts:
