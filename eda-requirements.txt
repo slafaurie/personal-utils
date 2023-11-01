@@ -1,0 +1,11 @@
+# contains library i use for DA/ML
+
+#general
+pandas
+numpy
+seaborn
+statsmodels
+
+# cloud connections
+google-cloud-bigquery[pandas]
+google-cloud-bigquery-storage
