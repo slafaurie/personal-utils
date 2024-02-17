@@ -42,6 +42,7 @@ def plot_relation_between_target_and_covariates(
     """
     This function takes a pandas DataFrame, a target column name, a list of covariate column names, and an optional number of columns for the plot grid as arguments.
     It then plots scatterplots for numeric covariates and boxplots for categorical covariates, with the target column on the y-axis and each covariate on the x-axis.
+    Additionally, for numeric covariates, it annotates the plot with the Pearson correlation value between the target and the covariate.
     The function returns nothing, but displays the plot.
     """
     nrows = int(np.ceil(len(covariates) / ncols))
@@ -50,6 +51,17 @@ def plot_relation_between_target_and_covariates(
     for i, covariate in enumerate(covariates):
         if is_numeric(data[covariate]):
             sns.regplot(x=covariate, y=target, data=data, ax=axs[i], **kwargs)
+            # Calculate and annotate Pearson correlation
+            correlation = data[[covariate, target]].corr().iloc[0,1]
+            axs[i].annotate(
+                f'Pearson: {correlation:.2f}'
+                , xy=(0.05, 0.95)
+                , xycoords='axes fraction'
+                , ha='left'
+                , va='top'
+                , fontsize=10
+                , bbox=dict(boxstyle="round", alpha=0.5, color="w")
+            )
         else:
             sns.boxplot(x=covariate, y=target, data=data, ax=axs[i], **kwargs)
         axs[i].set_title(f'{target} vs {covariate}')
