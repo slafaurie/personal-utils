@@ -28,3 +28,17 @@ def convert_int_into_2d_array(data_points, number_of_columns):
             counter += 1
     return two_dim_array
 
+##################
+
+def chunk_list(data, size):
+    """
+    Yield successive size chunks from data.
+    - Why not return?
+    Return would only get you the first slice, while yield make sure to loop over the full list
+
+    - What if the slice is longer than the length? no problem as long as the left index is not ouf of bound.
+    Python returns whatever values are left without throwing error.
+    """
+    for i in range(0, len(data), size):
+        yield data[i:i + size]
+
