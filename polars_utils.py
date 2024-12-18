@@ -24,3 +24,17 @@ def get_time_lags(df: pl.DataFrame, n_lags: list[int]) -> pl.DataFrame:
         ])
         .drop_nulls()
     )
+
+
+
+def row_number(data, partition_cols, sort_col, col_name:str='row_number', descending:bool=False):
+    """
+    SQL-like row_number function
+    """
+    return (
+        data
+        .sort(by= sort_col, descending=descending)
+        .with_columns(
+            pl.col(sort_col).cum_count().over(partition_by=partition_cols).alias(col_name)
+        )
+    )
