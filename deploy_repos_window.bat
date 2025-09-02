@@ -13,6 +13,9 @@ echo.
 echo Deployment started at %date% %time%
 echo.
 
+:: SET working directory same path as the script
+cd /d "%~dp0"
+
 :: Configuration: Add new repositories here
 :: Format: "Repository Name|Repository Path"
 set "REPO_1=cw-dags|%cd%\cw-dags"
