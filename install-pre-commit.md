@@ -9,22 +9,22 @@ everything runs smoothly beforing committing changes to the main branch. To use 
     * Clear jupyter notebook cells output (which tends to bloat repo size)
     * Run ruff linter and format to enforce proper styling
     ```
-    repos:
-    -   repo: https://github.com/kynan/nbstripout
-        rev: 0.7.1
-        hooks:
-        -   id: nbstripout
-            files: ".ipynb$"
-
-    - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
-    rev: v0.12.12
-    hooks:
-        # Run the linter.
-        - id: ruff-check
-        types_or: [ python, pyi ]
-        args: [ --fix ]
-        # Run the formatter.
-        - id: ruff-format
-        types_or: [ python, pyi ]
-```
+   repos:
+   -   repo: https://github.com/kynan/nbstripout
+       rev: 0.7.1
+       hooks:
+       -   id: nbstripout
+           files: ".ipynb$"
+   
+   - repo: https://github.com/astral-sh/ruff-pre-commit
+     # Ruff version.
+     rev: v0.12.12
+     hooks:
+       # Run the linter.
+       - id: ruff-check
+         types_or: [ python, pyi ]
+         args: [ --fix ]
+       # Run the formatter.
+       - id: ruff-format
+         types_or: [ python, pyi ]
+   ```
